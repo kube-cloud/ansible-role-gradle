@@ -16,7 +16,7 @@
 - name: ({{ ansible_distribution }}) Define commons facts
   set_fact:
    install_dir: "/opt/gradle/gradle-{{ v_major }}.{{ v_minor }}"
-   downloaded_file: "/tmp/gradle-{{ v_major }}.{{ v_minor }}.tar.gz"
+   downloaded_file: "/tmp/gradle-{{ v_major }}.{{ v_minor }}.zip"
    gradle_default: "{{ is_default | default(true) }}"
    alternatives:
     - 'gradle'
