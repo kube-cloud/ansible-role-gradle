@@ -1,0 +1,24 @@
+---
+- name: Converge
+  hosts: all
+
+  roles:
+   - role: jetune.java
+     vars:
+      from_repo: false
+      implementation: OPENJDK
+      v_major: 8
+      v_minor: 40
+      build: 25
+      os: linux
+      arch: x64
+      date: 10_feb_2015
+      checksum: md5:4980716637f353cfb27467d57f2faf9b
+      alternative_priority: 300
+      is_default: true
+
+   - role: ansible-role-gradle
+     vars:
+      v_major: 4
+      v_minor: 10.3
+      is_default: true

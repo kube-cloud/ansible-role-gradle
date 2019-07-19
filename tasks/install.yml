@@ -1,0 +1,60 @@
+---
+
+- name: ({{ ansible_distribution }}) Create installation directories
+  file:
+   path: "{{ install_dir }}"
+   state: directory
+
+- name: ({{ ansible_distribution }}) Unarchive Downloaded gradle archives
+  unarchive:
+   src: "{{ downloaded_file }}"
+   dest: "{{ install_dir }}"
+   creates: "{{ install_dir }}/bin/gradle"
+   remote_src: true
+   extra_opts:
+    - --strip-components=1
+
+- name: ({{ ansible_distribution }}) Find all script files
+  find:
+   file_type: file
+   paths: "{{ install_dir }}/bin/"
+   patterns: "gradle"
+   recurse: false
+   use_regex: false
+  register: scripts_find_result
+
+- name: ({{ ansible_distribution }}) Print Find task register result JSON
+  debug:
+   var: scripts_find_result
+
+- name: ({{ ansible_distribution }}) Set execution right to script files
+  file:
+   dest: "{{ item.path }}"
+   mode: "a+rx"
+  with_items: "{{ scripts_find_result.files }}"
+
+- name: ({{ ansible_distribution }}) Set the Gradle bin commands links in /usr/bin/
+  file:
+   src: "{{ install_dir }}/bin/{{ item }}"
+   dest: "/usr/bin/{{ item }}"
+   state: link
+   mode: a+x
+  with_items: "{{ alternatives }}"
+  when:
+   - gradle_default
+
+- name: ({{ ansible_distribution }}) Make sure /etc/profile.d/ directory exists
+  file:
+   path: "/etc/profile.d/"
+   mode: 0755
+   state: directory
+  when:
+   - gradle_default
+
+- name: ({{ ansible_distribution }}) Set the M2_HOME
+  template:
+   src: "templates/gradle_home.sh.j2"
+   dest: "/etc/profile.d/gradle_home.sh"
+   mode: a+x
+  when:
+   - gradle_default
