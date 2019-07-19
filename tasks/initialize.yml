@@ -23,6 +23,6 @@
 
 - name: ({{ ansible_distribution }}) Define version specific facts [Version = {{ v_major }}.{{ v_minor }}]
   set_fact:
-   url: "https://gradle.org/next-steps/?version={{ v_major }}.{{ v_minor }}&format=all"
+   url: "https://downloads.gradle.org/distributions/gradle-{{ v_major }}.{{ v_minor }}-all.zip"
   when:
    - v_major|int == 3
