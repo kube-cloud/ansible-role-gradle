@@ -48,7 +48,7 @@
   when:
    - gradle_default
 
-- name: ({{ ansible_distribution }}) Set the M2_HOME
+- name: ({{ ansible_distribution }}) Set the GRADLE_HOME
   template:
    src: "templates/gradle_home.sh.j2"
    dest: "/etc/profile.d/gradle_home.sh"

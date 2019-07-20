@@ -43,11 +43,3 @@ def test_gradle_installed(host):
 
     # Get GRADLE_HOME
     assert gradle_home == expected_gradle_home_path
-
-    # Run gradle version
-    gradle_version = host.run('. {} && gradle --version'
-                              .format('/etc/profile.d/java_home.sh'))\
-                         .stdout.split('\n')[2].split(' ')[1]
-
-    # Check gradle version
-    assert gradle_version == expected_gradle_version
