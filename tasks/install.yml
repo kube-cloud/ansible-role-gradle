@@ -18,9 +18,6 @@
 
 - name: ({{ ansible_distribution }}) Move unarchived from ({{ temp_dir }}) to ({{ install_dir }})
   command: mv {{ temp_dir }}/{{ gradle_dirname }}/* {{ install_dir }}
-   src: "{{ downloaded_file }}"
-   dest: "{{ temp_dir }}"
-   remote_src: true
   args:
    creates: "{{ install_dir }}/bin"
 
