@@ -1,11 +1,28 @@
 ---
 
-- name: ({{ ansible_distribution }}) Unarchive Downloaded gradle archives
+- name: ({{ ansible_distribution }}) Create temporairy extract directory ({{ temp_dir }})
+  file:
+   path: "{{ temp_dir }}"
+   state: directory
+
+- name: ({{ ansible_distribution }}) Create installation directories ({{ install_dir }})
+  file:
+   path: "{{ install_dir }}"
+   state: directory
+
+- name: ({{ ansible_distribution }}) Unarchive Downloaded gradle archives in temporary dir ({{ temp_dir }})
   unarchive:
    src: "{{ downloaded_file }}"
-   dest: "{{ install_dir }}"
-   creates: "{{ install_dir }}/bin/gradle"
+   dest: "{{ temp_dir }}"
    remote_src: true
+
+- name: ({{ ansible_distribution }}) Move unarchived from ({{ temp_dir }}) to ({{ install_dir }})
+  command: mv {{ temp_dir }}/{{ gradle_dirname }}/* {{ install_dir }}
+   src: "{{ downloaded_file }}"
+   dest: "{{ temp_dir }}"
+   remote_src: true
+  args:
+   creates: "{{ install_dir }}/bin"
 
 - name: ({{ ansible_distribution }}) Find all script files
   find:
