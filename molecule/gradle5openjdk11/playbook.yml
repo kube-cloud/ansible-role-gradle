@@ -16,7 +16,7 @@
       alternative_priority: 300
       is_default: true
 
-   - role: ansible-role-maven
+   - role: ansible-role-gradle
      vars:
       v_major: 5
       v_minor: 5.1
