@@ -3,6 +3,7 @@
 ![Python](https://img.shields.io/pypi/pyversions/testinfra.svg?style=flat)
 ![Licence](https://img.shields.io/github/license/kube-cloud/ansible-role-gradle.svg?style=flat)
 [![Travis Build](https://img.shields.io/travis/kube-cloud/ansible-role-gradle.svg?style=flat)](https://travis-ci.com/kube-cloud/ansible-role-gradle)
+[![Galaxy Role Downloads](https://img.shields.io/ansible/role/d/42169.svg?style=flat)](https://galaxy.ansible.com/jetune/gradle)
 
 Ansible role used to install Gradle on Linux based Operating System.
 
