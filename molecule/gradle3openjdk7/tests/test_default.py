@@ -19,11 +19,11 @@ def test_gradle_installed(host):
 
     # gradle Home Path
     expected_gradle_home_path = '/opt/gradle/gradle-{}'\
-                               .format(expected_gradle_version)
+                                .format(expected_gradle_version)
 
     # gradle archive file
     expected_gradle_archive_path = '/tmp/gradle-{}.tar.gz'\
-                                  .format(expected_gradle_version)
+                                   .format(expected_gradle_version)
 
     # Check gradle Home Path exists
     assert host.file(expected_gradle_home_path).exists
