@@ -5,7 +5,7 @@
    path: "{{ unarchive_parent_dir }}"
    state: directory
 
-- name: ({{ ansible_distribution }}) Unarchive Downloaded gradle archives in temporary dir ({{ temp_dir }})
+- name: ({{ ansible_distribution }}) Unarchive gradle archives to dir ({{ unarchive_parent_dir }})
   unarchive:
    src: "{{ downloaded_file }}"
    dest: "{{ unarchive_parent_dir }}"

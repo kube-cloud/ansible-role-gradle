@@ -22,7 +22,7 @@ def test_gradle_installed(host):
                                 .format(expected_gradle_version)
 
     # gradle archive file
-    expected_gradle_archive_path = '/tmp/gradle-{}.tar.gz'\
+    expected_gradle_archive_path = '/tmp/gradle-{}.zip'\
                                    .format(expected_gradle_version)
 
     # Check gradle Home Path exists
