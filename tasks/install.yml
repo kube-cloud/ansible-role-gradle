@@ -1,18 +1,11 @@
 ---
 
-- name: ({{ ansible_distribution }}) Create installation directories
-  file:
-   path: "{{ install_dir }}"
-   state: directory
-
 - name: ({{ ansible_distribution }}) Unarchive Downloaded gradle archives
   unarchive:
    src: "{{ downloaded_file }}"
    dest: "{{ install_dir }}"
    creates: "{{ install_dir }}/bin/gradle"
    remote_src: true
-   extra_opts:
-    - --strip-components=1
 
 - name: ({{ ansible_distribution }}) Find all script files
   find:

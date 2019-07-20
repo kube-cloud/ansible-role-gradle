@@ -6,48 +6,48 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_maven_installed(host):
+def test_gradle_installed(host):
 
-    # Maven expected version major
-    maven_major = '3'
+    # gradle expected version major
+    gradle_major = '5'
 
-    # Maven expected version minor
-    maven_minor = '6.1'
+    # gradle expected version minor
+    gradle_minor = '5.1'
 
-    # Maven expected version
-    expected_maven_version = maven_major + '.' + maven_minor
+    # gradle expected version
+    expected_gradle_version = gradle_major + '.' + gradle_minor
 
-    # Maven Home Path
-    expected_maven_home_path = '/opt/maven/maven-{}'\
-                               .format(expected_maven_version)
+    # gradle Home Path
+    expected_gradle_home_path = '/opt/gradle/gradle-{}'\
+                               .format(expected_gradle_version)
 
-    # Maven archive file
-    expected_maven_archive_path = '/tmp/maven-{}.tar.gz'\
-                                  .format(expected_maven_version)
+    # gradle archive file
+    expected_gradle_archive_path = '/tmp/gradle-{}.tar.gz'\
+                                  .format(expected_gradle_version)
 
-    # Check Maven Home Path exists
-    assert host.file(expected_maven_home_path).exists
-    assert host.file(expected_maven_home_path).is_directory
+    # Check gradle Home Path exists
+    assert host.file(expected_gradle_home_path).exists
+    assert host.file(expected_gradle_home_path).is_directory
 
-    # Maven Downloaded file
-    maven_archive = host.file(expected_maven_archive_path)
+    # gradle Downloaded file
+    gradle_archive = host.file(expected_gradle_archive_path)
 
-    # Check that Maven Archive exists
-    assert maven_archive.exists
-    assert maven_archive.is_file
+    # Check that gradle Archive exists
+    assert gradle_archive.exists
+    assert gradle_archive.is_file
 
-    # Run Maven home
-    m2_home = host.run('. {} && echo $M2_HOME'
-                       .format('/etc/profile.d/maven_home.sh'))\
-                  .stdout.split('\n')[0]
+    # Run gradle home
+    gradle_home = host.run('. {} && echo $GRADLE_HOME'
+                           .format('/etc/profile.d/gradle_home.sh'))\
+                      .stdout.split('\n')[0]
 
-    # Get M2_HOME
-    assert m2_home == expected_maven_home_path
+    # Get GRADLE_HOME
+    assert gradle_home == expected_gradle_home_path
 
-    # Run Maven version
-    m2_version = host.run('. {} && mvn --version'
-                          .format('/etc/profile.d/java_home.sh'))\
-                     .stdout.split('\n')[0].split(' ')[2]
+    # Run gradle version
+    gradle_version = host.run('. {} && gradle --version'
+                              .format('/etc/profile.d/java_home.sh'))\
+                         .stdout.split('\n')[2].split(' ')[1]
 
-    # Check maven version
-    assert m2_version == expected_maven_version
+    # Check gradle version
+    assert gradle_version == expected_gradle_version
