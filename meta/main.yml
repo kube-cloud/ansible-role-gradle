@@ -13,13 +13,8 @@ galaxy_info:
           versions:
               - 6
               - 7
-        - name: Debian
-          versions:
-              - jessie
-              - strech
         - name: Ubuntu
           versions:
-              - trusty
               - xenial
               - bionic
     galaxy_tags:
@@ -31,6 +26,6 @@ galaxy_info:
         - system
         - linux
         - build
-        - maven
+        - gradle
 
 dependencies: []
