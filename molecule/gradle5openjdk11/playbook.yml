@@ -21,3 +21,5 @@
       v_major: 5
       v_minor: 5.1
       is_default: true
+      required_packages:
+       - "unzip"

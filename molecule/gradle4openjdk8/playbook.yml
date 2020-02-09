@@ -22,3 +22,5 @@
       v_major: 4
       v_minor: 10.3
       is_default: true
+      required_packages:
+       - "unzip"

@@ -15,6 +15,7 @@
 
 - name: ({{ ansible_distribution }}) Define commons facts
   set_fact:
+   required_packages: "{{ required_packages | default([]) }}"
    unarchive_parent_dir: "/opt/gradle"
    install_dir: "/opt/gradle/gradle-{{ v_major }}.{{ v_minor }}"
    downloaded_file: "/tmp/gradle-{{ v_major }}.{{ v_minor }}.zip"

@@ -1,5 +1,11 @@
 ---
 
+- name: ({{ ansible_distribution }}) Ensure required packages are installed
+  package:
+   name: "{{ item }}"
+   state: present
+  loop: "{{ required_packages }}"
+
 - name: ({{ ansible_distribution }}) Create installation directories ({{ unarchive_parent_dir }})
   file:
    path: "{{ unarchive_parent_dir }}"
