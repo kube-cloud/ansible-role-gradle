@@ -9,9 +9,6 @@ gradle_v_minor: "5.1"
 # Gradle default version
 gradle_default: true
 
-# Gradle local repository
-gradle_local_repository: "/opt/gradle/repository"
-
 # Gradle user
 gradle_user: "root"
 
@@ -20,6 +17,9 @@ gradle_group: "root"
 
 # Gradle required packages
 gradle_required_packages: []
+
+# Gradle local repository
+gradle_local_repository: "{{ '/root' if gradle_user == 'root' else '/home/' + gradle_user }}/.gradle"
 
 # Gradle properties
 gradle_properties: []
