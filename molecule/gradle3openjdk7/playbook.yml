@@ -19,8 +19,22 @@
 
    - role: ansible-role-gradle
      vars:
-      v_major: 3
-      v_minor: 5.1
-      is_default: true
-      required_packages:
+      gradle_v_major: "3"
+      gradle_v_minor: "5.1"
+      gradle_default: true
+      gradle_local_repository: "/opt/gradle/repository"
+      gradle_user: "root"
+      gradle_group: "root"
+      gradle_properties:
+       - key: "reporitorySnaphots"
+         value: "https://artifact.lab.kube-cloud.be/repository/maven-snapshots"
+       - key: "reporitoryReleases"
+         value: "https://artifact.lab.kube-cloud.be/repository/maven-releases"
+       - key: "reporitoryPublic"
+         value: "https://artifact.lab.kube-cloud.be/repository/maven-public"
+       - key: "reporitoryUser"
+         value: "repoUserName"
+       - key: "reporitoryToken"
+         value: "repoUserToken"
+      gradle_required_packages:
        - "unzip"

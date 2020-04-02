@@ -4,7 +4,7 @@
   package:
    name: "{{ item }}"
    state: present
-  loop: "{{ required_packages }}"
+  loop: "{{ gradle_required_packages }}"
 
 - name: ({{ ansible_distribution }}) Create installation directories ({{ unarchive_parent_dir }})
   file:
@@ -53,6 +53,33 @@
    state: directory
   when:
    - gradle_default
+
+- name: ({{ ansible_distribution }}) Set the GRADLE_* variable in global environment file
+  lineinfile:
+   dest: "/etc/environment"
+   regexp: "{{ item.key }}="
+   line: "{{ item.key }}={{ item.value }}"
+  loop:
+   - key: "GRADLE_HOME"
+     value: "{{ install_dir }}"
+   - key: "GRADLE_USER_HOME"
+     value: "{{ gradle_local_repository }}"
+
+- name: ({{ ansible_distribution }}) Make sure {{ gradle_local_repository }} directory exists
+  file:
+   path: "{{ gradle_local_repository }}"
+   mode: 0755
+   state: directory
+   owner: "{{ gradle_user }}"
+   group: "{{ gradle_group }}"
+
+- name: ({{ ansible_distribution }}) Generate Gradle Settings
+  template:
+   src: "templates/gradle.properties.j2"
+   dest: "{{ gradle_local_repository | regex_replace('\\/$', '') }}/gradle.properties"
+   mode: 0755
+   owner: "{{ gradle_user }}"
+   group: "{{ gradle_group }}"
 
 - name: ({{ ansible_distribution }}) Set the GRADLE_HOME
   template:
