@@ -13,7 +13,7 @@ Ansible role used to install Gradle on Linux based Operating System.
 
 # Supported Version
 
-* Apache Gradle 3.x/4.x/5.x
+* Apache Gradle 3.x/4.x/5.x/6.x/7.x
 
 # Supported OS
 
@@ -50,8 +50,8 @@ Ansible role used to install Gradle on Linux based Operating System.
 
    - role: jetune.gradle
      vars:
-      v_major: 5
-      v_minor: 5.1
+      gradle_v_major: 5
+      gradle_v_minor: 5.1
       is_default: true
 
 
